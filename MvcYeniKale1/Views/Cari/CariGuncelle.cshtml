@@ -1,0 +1,82 @@
+﻿
+@{
+    Layout = null;
+}
+@model Cari
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/scripts/w3.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    <title>Cari Güncelle / </title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="w3-card">
+            <div class="w3-container w3-amber">
+                <h2>@Model.Kisi.Ad</h2>
+            </div>
+
+            <form action="~/Cari/CariGuncelle" method="post" class="w3-container">
+                <input type="hidden" name="CariID" value="@Model.CariID" />
+                <label><b>Durum</b></label><br>
+                <select name="cDId" class="w3-select w3-border">
+                    @foreach (Durum drm in ViewBag.Durumlar)
+                    {
+                        if (drm.DurumID == @Model.Durum.DurumID)
+                        {
+                            <option selected="selected" value="@drm.DurumID">@drm.Durumlar</option>
+                        }
+                        else
+                        {
+                            <option value="@drm.DurumID">@drm.Durumlar</option>
+                        }
+                    }
+                </select>
+                <p>
+                    <label><b>Tutar</b></label>
+                    <input class="w3-input w3-border" name="cTutar" type="text" pattern="[0-9]+([\.,][0-9]+)?" value="@Model.Tutar.Value" placeholder="0,00" required="required" maxlength="8">
+                </p>
+                <p>
+                    <label><b>Tarih</b></label><br>
+                    <input type="date" name="cTarih" value="@Model.Tarih.Value.ToString("yyyy-MM-dd")">
+                <p>
+                <p>
+                    <label><b>Açıklama</b></label>
+                    @if (Model.Aciklama != null)
+                    {
+                        <input class="w3-input w3-border" name="cAciklama" type="text" value="@Model.Aciklama">
+                    }
+                    else
+                    {
+                        <input class="w3-input w3-border" name="cAciklama" type="text" value="">
+                    }
+                </p>
+                <p>
+                    <button class="w3-button w3-amber" type="submit">Güncelle ?</button>
+                    <a href="~/Cari/CariSil/@Model.CariID" class="w3-red w3-button">Sil !</a>
+                    <a href="~/Cari/Cari/@Model.KisiID" class="w3-blue-grey w3-button">Geri Dön <</a>
+                </p>
+                <input type="hidden" name="KisiID" value="@Model.KisiID" />
+            </form>
+            
+        </div>
+    </div>
+    <script src="~/scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/scripts/jquery.inputmask.js"></script>
+    <script>
+        $(":input").inputmask();
+        $("#phone").inputmask({ "mask": "(999) 999 99 99" });
+        $("#phone2").inputmask({ "mask": "(999) 999 99 99" });
+    </script>
+</body>
+</html>

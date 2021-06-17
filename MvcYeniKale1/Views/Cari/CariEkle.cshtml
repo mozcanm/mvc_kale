@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+@model Kisi
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/scripts/w3.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width" />
+    <title>CariEkle</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="w3-card">
+            <div class="w3-container w3-green">
+                <h2>@Model.Ad</h2>
+            </div>
+
+            <form action="~/Cari/CariEkle" method="post" class="w3-container" id="cariekleform">
+                <input type="hidden" name="KisiID" value="@Model.KisiID" />
+                <label><b>Durum</b></label><br>
+                <select name="cDId" class="w3-select w3-border">
+                    @foreach (Durum drm in ViewBag.Durumlar)
+                    {
+                        <option value="@drm.DurumID">@drm.Durumlar</option>
+                    }
+                </select>
+                <p>
+                    <label><b>Tutar</b></label>
+                    <input class="w3-input w3-border" name="cTutar" type="text" pattern="[0-9]+([\.,][0-9]+)?" value="0" placeholder="0" required="required" maxlength="8">
+                </p>
+                <p>
+                    <label><b>Tarih</b></label><br>
+                    <input type="date" name="cTarih" value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                <p>
+                <p>
+                    <label><b>Açıklama</b></label>
+                    <input class="w3-input w3-border" name="cAciklama" type="text">
+                </p>
+                <p>
+                    <button class="w3-button w3-green" type="submit">Ekle</button>
+                    <a href="~/Cari/Cari/@Model.KisiID" class="w3-blue-grey w3-button">Geri Dön</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

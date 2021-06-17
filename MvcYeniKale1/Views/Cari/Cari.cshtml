@@ -1,0 +1,657 @@
+﻿
+@{
+    Layout = null;
+}
+@model Kisi
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/scripts/w3.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width" />
+    <title>Cari / @Model.Ad</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="w3-top w3-indigo w3-hide-medium  w3-hide-small">
+            <div class="w3-col" style="width:70%"><h2>@Model.Ad</h2></div>
+            <div class="w3-col" style="width:30%">
+                <div class="w3-left-align">
+                    <a href="javascript: history.go(-1)"><img src="~/img/back1.png" alt="LİSTE" /></a> <a href="" onclick="window.print()"><img src="~/img/print3.png" alt="YAZDIR" /> </a>
+                    <div class="w3-dropdown-hover">
+                        <button class="w3-padding w3-button w3-hover-amber" title="Menü"><b>+</b></button>
+                        <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                            <a href="~/Cari/CariEkle/@Model.KisiID" class="w3-bar-item w3-button w3-hover-amber">Cari Ekle</a>
+                            <a href="~/Kisi/Kisi" class="w3-bar-item w3-button w3-hover-amber">Cari Listesi</a>
+                            <a href="~/Mali/Alacak" class="w3-bar-item w3-button w3-hover-amber">Alacaklarım</a>
+                            <a href="~/Mali/Borc" class="w3-bar-item w3-button w3-hover-amber">Borçlarım</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h3 class="w3-hide-large">@Model.Ad</h3>
+        
+        <div class="w3-hide-medium w3-hide-small">
+            <font color="white">
+                .<br />.<br />.
+            </font>
+        </div>
+
+        <div class="w3-container">
+            <div class="w3-row-padding">
+                <div class="w3-col w3-margin-bottom" style="width:10%">
+                    <div class="w3-display-container">
+                        <b>Tel 1:</b>
+                    </div>
+                </div>
+                <div class="w3-col w3-margin-bottom" style="width:25%">
+                    <div class="w3-display-container w3-left-align">
+                        @Model.Tel1
+                    </div>
+                </div>
+                <div class="w3-col w3-margin-bottom" style="width:10%">
+                    <div class="w3-display-container">
+                        <b>Firma:</b>
+                    </div>
+                </div>
+                <div class="w3-col w3-margin-bottom" style="width:55%">
+                    <div class="w3-display-container w3-left-align">
+                        @Model.Firma
+                    </div>
+                </div>
+            </div>
+
+            <div class="w3-row-padding">
+                <div class="w3-col w3-margin-bottom" style="width:10%">
+                    <div class="w3-display-container">
+                        <b>Tel 2:</b>
+                    </div>
+                </div>
+                <div class="w3-col w3-margin-bottom" style="width:25%">
+                    <div class="w3-display-container w3-lef-align">
+                        @Model.Tel2
+                    </div>
+                </div>
+                <div class="w3-col w3-margin-bottom" style="width:10%">
+                    <div class="w3-display-container">
+                        <b>Adres:</b>
+                    </div>
+                </div>
+                <div class="w3-col w3-margin-bottom" style="width:55%">
+                    <div class="w3-display-container w3-left-align">
+                        @Model.Adres
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="w3-row-padding">
+            <table>
+                <tr>
+                    @if (ViewBag.KalanAlacak > 0)
+                    {
+                        <td class="w3-text-brown"><b>KALAN ALACAK: </b></td>
+                        <td class="w3-text-brown"><b>@string.Format("{0:N}\n", ViewBag.KalanAlacak)</b></td>
+                    }
+
+                </tr>
+            </table>
+        </div>
+
+
+        <div class="w3-row-padding">
+            <div class="w3-col" style="width:14%">
+                <div class="w3-display-container">
+                    <h3 class="w3-border-bottom w3-border-blue-grey">Durum</h3>
+                </div>
+            </div>
+            <div class="w3-col" style="width:14%">
+                <div class="w3-display-container">
+                    <h3 class="w3-border-bottom w3-border-blue-grey w3-right-align">Tutar</h3>
+                </div>
+            </div>
+            <div class="w3-col" style="width:15%">
+                <div class="w3-display-container  w3-center">
+                    <h3 class="w3-border-bottom w3-border-blue-grey">Tarih</h3>
+                </div>
+            </div>
+            <div class="w3-col" style="width:57%">
+                <div class="w3-display-container">
+                    <h3 class="w3-border-bottom w3-border-blue-grey">Açıklama</h3>
+                </div>
+            </div>
+        </div>
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 1)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Alacak</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                    </div>
+                </div>
+
+
+            }
+        }
+        @if (ViewBag.AlacakToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:15%">
+                    <b>ALACAK:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.AlacakToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:14%">
+                    <div class=" w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 2)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Alındı</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.AlindiToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>ALINDI:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.AlindiToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+                    <div class="w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 3)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Borç</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.BorcToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>BORÇ:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.BorcToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 4)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Ödendi</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.OdendiToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>ÖDENDİ:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.OdendiToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+                    <div class="w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 5)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Gider</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.GiderToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>GİDER:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.GiderToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+                    <div class="w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 6)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Bilgi</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.BilgiToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>BİLGİ:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.BilgiToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+                    <div class="w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 7)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Mesai</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.MesaiToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>MESAİ:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.MesaiToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+                    <div class="w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 8)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Gelir</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.GelirToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>GELİR:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.GelirToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+                    <div class="w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 9)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">İskonto</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.IskontoToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container w3-margin-bottom">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>İSKONTO:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.IskontoToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+                    <div class="w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+
+        @foreach (Cari cari in ViewBag.ListeCari)
+        {
+            if (cari.DurumID == 10)
+            {
+                <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                    <div class="w3-col" style="width:14%">
+                        <a href="~/Cari/CariGuncelle/@cari.CariID" class="w3-text-black w3-hover-text-purple w3-hover-khaki">Ödeme</a>
+                    </div>
+
+                    <div class="w3-col" style="width:14%">
+                        <div class="w3-right-align">
+                            @string.Format("{0:N}\n", cari.Tutar.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:15%">
+                        <div class="w3-center">
+                            @string.Format("{0:dd/MM/yyyy}", cari.Tarih.Value)
+                        </div>
+                    </div>
+                    <div class="w3-col" style="width:57%">
+
+                        @cari.Aciklama
+
+                    </div>
+                </div>
+            }
+        }
+        @if (ViewBag.OdemeToplam > 0)
+        {
+            <div class="w3-row-padding w3-hover-khaki w3-container">
+
+                <div class="w3-col w3-right-align" style="width:14%">
+                    <b>ÖDEME:</b>
+                </div>
+
+                <div class="w3-col" style="width:14%">
+                    <div class="w3-right-align ">
+                        <b>@string.Format("{0:N}\n", ViewBag.OdemeToplam)</b>
+                    </div>
+                </div>
+                <div class="w3-col" style="width:15%">
+                    <div class="w3-center">
+
+                    </div>
+                </div>
+                <div class="w3-col" style="width:57%">
+
+                </div>
+            </div>
+        }
+    </div>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
