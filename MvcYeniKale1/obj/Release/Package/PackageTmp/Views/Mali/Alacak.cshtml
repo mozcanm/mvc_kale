@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model IEnumerable<MaliViewModel>
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/scripts/w3.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    <title>Alacaklarım / Kale Dekor ve Mobilya</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td {
+            border: 0px solid #dddddd;
+            text-align: left;
+            padding: 3px;
+        }
+
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        tr:hover {
+            background-color: #FDFFC9;
+        }
+    </style>
+</head>
+<body>
+    <div class="w3-top w3-hide-medium  w3-hide-small">
+        <div class="w3-row w3-bar w3-indigo w3-card" style="height:35px;">
+            <div class="w3-col" style="width:4%">
+                <div class="w3-center">
+                    <a href="javascript: history.go(-1)"><img src="~/img/back1.png" alt="LİSTE" /></a> <a href="" onclick="window.print()"><img src="~/img/print3.png" alt="YAZDIR" /></a>
+                </div>
+            </div>
+            <div class="w3-col" style="width:12%">
+                <div class="w3-center">
+                     <b>SON İŞLEM</b>
+                </div>
+            </div>
+            <div class="w3-col" style="width:31%">
+                <div class="w3-left-align">
+                    <b>AD</b>
+                </div>
+            </div>
+            <div class="w3-col" style="width:17%">
+                <div class="w3-left-align">
+                    <b>TELEFON</b>
+                </div>
+            </div>
+            <div class="w3-col" style="width:12%">
+                <div class="w3-right-align">
+                    <b>BAKİYE</b>
+                </div>
+            </div>
+            <div class="w3-col" style="width:12%">
+                <div class="w3-right-align">
+                    <b>ALINDI</b>
+                </div>
+            </div>
+            <div class="w3-col" style="width:12%">
+                <div class="w3-right-align">
+                    <b>KALAN</b>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+    <table>
+        
+        
+            <tr class="w3-hide-large">
+                <th style="width: 4%; text-align:center">NO</th>
+                <th style="width:12%; text-align:left">SON</th>
+                <th style="width:31%; text-align:left">AD</th>
+                <th style="width:17%; text-align:left">TELEFON</th>
+                <th style="width:12%; text-align:right">BAKİYE</th>
+                <th style="width:12%; text-align:right">ALINDI</th>
+                <th style="width:12%; text-align:right">KALAN</th>
+            </tr>
+        
+        @{int no = 0; decimal alacakToplam = 0;}
+        @foreach (var item in Model)
+        {
+            if (item.mAlacagim != 0)
+            {
+                no++;
+                alacakToplam += item.mAlacagim;
+                <tr>
+                    <td style="width:4%; text-align:center">@no.ToString()</td>
+                    <td style="width:12%">@item.mSonTarih</td>
+                    <td style="width:31%"><a href="~/Cari/Cari/@item.mKisiID">@item.mAd</a></td>
+                    <td style="width:17%">@item.mTelefon</td>
+                    <td style="width:12%; text-align:right">@string.Format("{0:N}\n", item.mBakiye)</td>
+                    <td style="width:12%; text-align:right">@string.Format("{0:N}\n", item.mAlindi)</td>
+                    <td style="width:12%; text-align:right">@string.Format("{0:N}\n", item.mAlacagim)</td>
+                </tr>
+            }
+        }
+    <tr>
+        <td style="width:4%"></td>
+        <td style="width:12%"></td>
+        <td style="width:31%"></td>
+        <td style="width:17%"></td>
+        <td style="width:12%"></td>
+        <td style="width:12%; text-align:right"><b>TOPLAM: </b></td>
+        <td style="width:12%; text-align:right"><b>@string.Format("{0:N}\n", alacakToplam)</b></td>
+    </tr>
+    </table>
+   
+</body>
+</html>

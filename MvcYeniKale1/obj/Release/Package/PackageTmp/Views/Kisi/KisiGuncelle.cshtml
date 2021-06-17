@@ -1,0 +1,68 @@
+﻿@{
+    Layout = null;
+}
+@model Kisi
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/scripts/w3.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width" />
+    <title>Güncelle / @Model.Ad</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <div class="w3-container w3-amber">
+            <h1>@Model.Ad</h1></div>
+            <form action="~/Kisi/KisiGuncelle" method="post">
+                <table>
+                    <tr>
+                        <td><input type="hidden" name="KisiID" value="@Model.KisiID" /></td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Ad: </b></label></td>
+                        <td><input type="text" name="kAd" value="@Model.Ad" placeholder="Lütfen ad giriniz.." minlength="2" maxlength="31" required="required" /></td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Firma: </b></label></td>
+                        <td><input type="text" name="kFirma" value="@Model.Firma" maxlength="35" /></td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Tel 1: </b></label></td>
+                        <td>
+                            <input id="phone" type="text" name="kTel1" value="@Model.Tel1">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Tel 2: </b></label></td>
+                        <td><input id="phone2" type="text" name="kTel2" value="@Model.Tel2"></td>
+                    </tr>
+                    <tr>
+                        <td><label><b>Adres: </b></label></td>
+                        <td><input type="text" name="kAdres" value="@Model.Adres" maxlength="100" /></td>
+                    </tr>
+                    <tr>
+                        <td><a href="~/Kisi/Kisi" class="w3-button w3-red">İptal</a></td>
+                        <td><input type="submit" value="Güncelle" class="w3-button w3-amber w3-animate-input" /></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    <script src="~/scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/scripts/jquery.inputmask.js"></script>
+    <script>
+        $(":input").inputmask();
+
+        $("#phone").inputmask({ "mask": "(999) 999 99 99" });
+        $("#phone2").inputmask({ "mask": "(999) 999 99 99" });
+    </script>
+</body>
+</html>

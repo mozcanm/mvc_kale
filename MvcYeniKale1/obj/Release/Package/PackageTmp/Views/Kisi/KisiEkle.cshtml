@@ -1,0 +1,59 @@
+﻿
+@{
+    Layout = null;
+}
+
+@model Kisi
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/scripts/w3.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    <meta name="viewport" content="width=device-width" />
+    <title>KisiEkle</title>
+</head>
+<body>
+    <div>
+        <h2>Kişi Ekle</h2>
+        <form action="/Kisi/KisiEkle" method="post">
+            <table>
+                <tr>
+                    <td><label>Ad: </label></td>
+                    <td><input type="text" name="kisiAd" placeholder="Lütfen ad giriniz.." minlength="2" required="required" maxlength="31" /></td>
+                </tr>
+                <tr>
+                    <td><label>Firma: </label></td>
+                    <td><input type="text" name="kisiFirma" maxlength="35" /></td>
+                </tr>
+                <tr>
+                    <td><label>Tel 1: </label></td>
+                    <td><input type="text" id="phone" name="kisiTel1" /></td>
+                </tr>
+                <tr>
+                    <td><label>Tel 2: </label></td>
+                    <td><input type="text" id="phone2" name="kisiTel2" /></td>
+                </tr>
+                <tr>
+                    <td><label>Adres: </label></td>
+                    <td><input type="text" name="kisiAdres" maxlength="100" /></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Ekle" class=" w3-animate-input w3-button w3-green" /></td>
+                    <td><a href="~/Kisi/Kisi" class="w3-button w3-blue-gray">Geri Dön</a></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+    <script src="~/scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/scripts/jquery.inputmask.js"></script>
+    <script>
+        $(":input").inputmask();
+
+        $("#phone").inputmask({ "mask": "(999) 999 99 99" });
+        $("#phone2").inputmask({ "mask": "(999) 999 99 99" });
+    </script>
+</body>
+</html>

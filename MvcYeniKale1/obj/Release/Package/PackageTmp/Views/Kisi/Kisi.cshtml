@@ -1,0 +1,155 @@
+﻿
+@{
+    Layout = null;
+}
+
+@*@model List<Kisi>*@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/scripts/jquery-3.6.0.min.js"></script>
+    <link href="~/scripts/w3.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    <title>Liste / Kale Dekor ve Mobilya</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        #myInput {
+            background-image: url('../../img/icon_search.png');
+            background-position: 100px 1px;
+            background-repeat: no-repeat;
+            width: 100%;
+            font-size: 14px;
+            padding: 1px 1px 1px 1px;
+            border: 1px solid #ddd;
+            margin-bottom: 1px;
+        }
+
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 0px solid #dddddd;
+            text-align: left;
+            padding: 3px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+        tr:hover {
+            background-color: #FDFFC9;
+        }
+    </style>
+</head>
+<body>
+    <div class="w3-top w3-hide-medium  w3-hide-small">
+        <div class="w3-row-padding w3-bar w3-indigo w3-card" style="height:35px;">
+            <div class="w3-col" style="width:3%">
+                
+                    <a href="" onclick="window.print()"><img src="~/img/print3.png" alt="YAZDIR" /> </a>
+                
+            </div>
+            <div class="w3-col" style="width:32%">
+                
+                    <b>AD</b>
+                
+            </div>
+            <div class="w3-col" style="width:31%">
+                <div class="w3-left-align">
+                    <b>FİRMA</b>
+                </div>
+            </div>
+            <div class="w3-col" style="width:18%">
+                
+                    <b>TELEFON</b>
+                
+            </div>
+
+
+            <div class="w3-dropdown-hover">
+                <button class="w3-padding w3-button w3-hover-amber" title="Menü"><b>+</b></button>
+                <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                    <a href="~/Kisi/KisiEkle" class="w3-bar-item w3-button w3-hover-amber">Cari Aç</a>
+                    <a href="~/Mali/Alacak" class="w3-bar-item w3-button w3-hover-amber">Alacaklarım</a>
+                    <a href="~/Mali/Borc" class="w3-bar-item w3-button w3-hover-amber">Borçlarım</a>
+                </div>
+            </div>
+
+            <div class="w3-col" style="width:11%">
+                <div class="w3-center">
+                    <input type="text" id="myInput" style="width:100%" placeholder="Ara.." title="Ad Arayın">
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    <br /><br />
+          
+          <table>
+              <tr class="w3-hide-large">
+                  <th style="width:3%; text-align:center">NO</th>
+                  <th style="width:32%;">AD</th>
+                  <th style="width:31%;">FİRMA</th>
+                  <th style="width:18%;">TELEFON</th>
+                  <th style="width:8%;"></th>
+                  <th style="width:8%;"></th>
+              </tr>
+              <tbody id="myTable" class="w3-hide-large">
+                  @{int no = 0; }
+                  @foreach (Kisi kisi in ViewBag.ListeKisi)
+                  {
+                      no++;
+                      <tr>
+                          <td style="width:2%; text-align:center">@no.ToString()</td>
+                          <td style="width:36%;"><a href="~/Cari/Cari/@kisi.KisiID">@kisi.Ad</a></td>
+                          <td style="width:36%;">@kisi.Firma</td>
+                          <td style="width:18%;">@kisi.Tel1</td>
+                          
+                      </tr>
+                  }
+              </tbody>
+              <tbody id="myTable" class="w3-hide-small w3-hide-medium">
+                  @{int no2 = 0; }
+                  @foreach (Kisi kisi in ViewBag.ListeKisi)
+                  {
+                      no2++;
+                      <tr class="w3-hide-medium w3-hide-small">
+                          <td style="width:2%; text-align:center">@no2.ToString()</td>
+                          <td style="width:32%;"><a href="~/Cari/Cari/@kisi.KisiID">@kisi.Ad</a></td>
+                          <td style="width:32%;">@kisi.Firma</td>
+                          <td style="width:18%;">@kisi.Tel1</td>
+                          <td style="width: 8%;text-align: right"><a href="~/Kisi/KisiGuncelle/@kisi.KisiID"><img src="~/img/update-user-1.png" /></a></td>
+                          <td style="width:8%; text-align:right"><a href="~/Kisi/KisiSil/@kisi.KisiID"><img src="~/img/delete1.png" /></a></td>
+                      </tr>
+                  }
+                  </tbody>
+          </table>
+          <script>
+              $(document).ready(function () {
+                  $("#myInput").on("keyup", function () {
+                      var value = $(this).val().toLowerCase();
+                      $("#myTable tr").filter(function () {
+                          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                      });
+                  });
+              });
+          </script>
+</body>
+</html>

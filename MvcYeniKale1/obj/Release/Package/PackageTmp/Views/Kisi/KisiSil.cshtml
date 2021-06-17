@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+@model Kisi
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/scripts/w3.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="~/img/logo.ico" type="image/x-icon">
+    <title>Kişi Sil?</title>
+    <style>
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h2>@Model.Ad</h2>
+        <h3>  Silinsin mi?</h3>
+        <form action="/Kisi/KisiSil" method="post">
+            <input type="hidden" name="KisiID" value="@Model.KisiID" />
+            <input type="submit" name="name" value="Evet" class="w3-red w3-button w3-animate-input" />
+            <a href="~/Kisi/Kisi" class="w3-button w3-blue-gray">Geri Dön</a>
+        </form>
+    </div>
+</body>
+</html>
